@@ -12,7 +12,7 @@ const card = ({heading , para1 , para2 , btnText , SecondlastText , logo , lastT
     </div>
 
     <div>
-        <button onClick={onclick} className='flex flex-row bg-blue-500 rounded-full p-1 hover:bg-blue-700 '>
+        <button onClick={onclick} className='flex flex-row hover:bg-blue-500 rounded-full p-1 bg-blue-700 '>
             <span className=' pr-2'>{btnText}</span>
             {logo}
         </button>
