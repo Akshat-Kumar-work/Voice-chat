@@ -1,9 +1,17 @@
 import React from 'react'
 import Card from '../components/shared/card'
 import {BsFillArrowRightCircleFill} from "react-icons/bs"
+import { useNavigate } from 'react-router-dom'
 
 
-const home = () => {
+const Home = () => {
+
+  const navigate = useNavigate();
+
+  const onClick = ()=>{
+    navigate("/register");
+  }
+
   return (
     <div className=' flex justify-center items-center'> 
 
@@ -12,10 +20,11 @@ const home = () => {
       btnText={"Get your username"} logo={<BsFillArrowRightCircleFill />}
       lastText={"Sign in"}
       SecondlastText={"Have an invite text?"}
+      onclick={onClick}
     />
 
     </div>
   )
 }
 
-export default home
+export default Home

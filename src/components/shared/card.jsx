@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const card = ({heading , para1 , para2 , btnText , SecondlastText , logo , lastText }) => {
+const card = ({heading , para1 , para2 , btnText , SecondlastText , logo , lastText , onclick}) => {
   return (
     <div className=' mt-40 w-[50%] max-w-[1260px] max-width-[90%]  flex flex-col p-5  items-center justify-center  space-y-4 m-3  bg-gray-800 rounded-lg '>
 
@@ -12,7 +12,7 @@ const card = ({heading , para1 , para2 , btnText , SecondlastText , logo , lastT
     </div>
 
     <div>
-        <button className='flex flex-row bg-blue-500 rounded-full p-1'>
+        <button onClick={onclick} className='flex flex-row bg-blue-500 rounded-full p-1 hover:bg-blue-700 '>
             <span className=' pr-2'>{btnText}</span>
             {logo}
         </button>
