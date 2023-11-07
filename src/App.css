@@ -1,0 +1,18 @@
+html{
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+ul{
+    list-style: none;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+body{
+    background: #121212;
+    color:white
+}
