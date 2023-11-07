@@ -1,8 +1,13 @@
 import React from 'react'
 
-const StepAvatar = () => {
+const StepAvatar = ({onNext}) => {
   return (
-    <div>StepAvatar</div>
+   <>
+
+   <div>Step Avatar</div>
+<button onClick={onNext}>Next</button>
+
+   </>
   )
 }
 

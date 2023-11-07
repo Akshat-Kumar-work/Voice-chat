@@ -17,12 +17,16 @@ const steps = {
 
 const Register = () => {
 
+    const onNext = ()=>{
+        setStep(step+1);
+    }
+
     const [step , setStep] = useState(1);
     const Step = steps[step];
 
   return (
     <div>
-        <Step/>
+        <Step onNext={onNext} />
     </div>
   )
 }
