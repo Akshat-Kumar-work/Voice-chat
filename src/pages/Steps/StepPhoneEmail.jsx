@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Phone from "../../components/phoneEmail/Phone"
+import Email from "../../components/phoneEmail/Email"
+
+
+const phoneEmailMap = {
+  phone: Phone,
+  email: Email
+}
 
 const StepPhoneEmail = ({onNext}) => {
-  return (
+  const [type , setType] = useState('phone');
+  const Type = phoneEmailMap[type];
+
+  function onNext(){
+   
+  }
+
+  return(
     <>
-        <div>Phone or email</div>
-        <button onClick={onNext}>Next</button>
+      <button onClick={()=>{ setType('phone')}}>Phone</button>
+      <button onClick={()=>{ setType('email')}}>email</button>
+        <Type onNext={onNext}/>
     </>
-  )
+  ) 
 }
 
 export default StepPhoneEmail
