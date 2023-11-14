@@ -15,9 +15,7 @@ const Authenticate = () => {
     function onNext () {
       console.log("inside authenticate ")
         setStep(step+1);
-        if(step === 3){
-          <Navigate to="/activate"/>
-        }
+     
     }
 
   return (
