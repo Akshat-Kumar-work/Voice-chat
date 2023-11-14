@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const card = ({ headingLogo, heading , para1 , para2 , btnText , SecondlastText , logo , lastText , onclick}) => {
+const card = ( { headingLogo, heading , para1 , para2 , btnText , SecondlastText , logo , lastText , onclick ,input}) => {
   return (
     <div className='  w-[50%] max-w-[1260px] max-width-[90%]  flex flex-col p-5  items-center justify-center  space-y-4 m-3  bg-gray-800 rounded-lg '>
 
@@ -10,6 +10,10 @@ const card = ({ headingLogo, heading , para1 , para2 , btnText , SecondlastText 
         <h1 className=' text-xl font-bold '> {headingLogo} <span> {heading}</span> </h1>
         <p className=' text-blue-300'> {para1}</p>
         <p className=' text-blue-300'> {para2} </p> 
+    </div>
+
+    <div>
+      {input}
     </div>
 
     <div>
@@ -23,6 +27,7 @@ const card = ({ headingLogo, heading , para1 , para2 , btnText , SecondlastText 
         <span>{SecondlastText} </span>
         <Link  className=' text-blue-400 text-center' to="/login"> {lastText} </Link> 
     </div>
+
 
     </div>
   )
