@@ -4,7 +4,7 @@ import {BsFillArrowRightCircleFill} from "react-icons/bs"
 import {BsTelephonePlus} from "react-icons/bs"
 import TextInput from '../shared/TextInput'
 
-const Phone = () => {
+const Phone = ({onNext}) => {
 
   const [phoneNumber , setPhoneNumber] = useState('');
   return (
@@ -21,11 +21,11 @@ const Phone = () => {
       SecondlastText={"By entering your number, you're agreeing to our Terms of Service and Privacy Policy. Thanks!"}
 
       input={<TextInput value={phoneNumber} onChange={ (event)=>setPhoneNumber(event.target.value)}/>}
-     
-    >
+      onclick={onNext}
+    />
 
 
-    </Card>
+ 
 
     </div>
   )

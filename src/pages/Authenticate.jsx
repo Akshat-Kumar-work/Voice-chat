@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import StepPhoneEmail from './Steps/StepPhoneEmail';
 import StepOtp from './Steps/StepOtp';
+import { Navigate } from 'react-router-dom';
 
 const Steps = {
     1: StepPhoneEmail,
@@ -12,7 +13,11 @@ const Authenticate = () => {
     const Step = Steps[step];
 
     function onNext () {
+      console.log("inside authenticate ")
         setStep(step+1);
+        if(step === 3){
+          <Navigate to="/activate"/>
+        }
     }
 
   return (

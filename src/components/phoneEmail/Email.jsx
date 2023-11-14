@@ -5,7 +5,7 @@ import { useState } from 'react'
 import TextInput from '../shared/TextInput'
 
 
-const Email = () => {
+const Email = ({onNext}) => {
   const [email , setemail] = useState('');
 
   return (
@@ -20,6 +20,7 @@ const Email = () => {
 
       SecondlastText={"By entering your email, you're agreeing to our Terms of Service and Privacy Policy. Thanks!"}
       input={<TextInput value={email} onChange={ (event)=>setemail(event.target.value)}/>}
+      onclick={onNext}
      
     />
 
