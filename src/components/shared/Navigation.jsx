@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Navigation = () => {
   return (
-    <div className=' flex justify-between pt-10' >  
+    <div className=' flex justify-between pt-10 mt-40' >  
 
     <nav className=' flex flex-row  pt-[20px] pb-[20px]  justify-center w-[100%]'>
       <Link to="/" >

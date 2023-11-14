@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Phone from "../../components/phoneEmail/Phone"
 import Email from "../../components/phoneEmail/Email"
+import {BsTelephonePlus} from "react-icons/bs"
+import {HiOutlineMail} from "react-icons/hi";
 
 
 const phoneEmailMap = {
@@ -18,9 +20,31 @@ const StepPhoneEmail = ({onNext}) => {
 
   return(
     <>
-      <button onClick={()=>{ setType('phone')}}>Phone</button>
-      <button onClick={()=>{ setType('email')}}>email</button>
+
+    <div className='flex items-center justify-center top-[6rem]'>
+
+         <div >
+
+         <div className=' space-x-5 flex   items-center justify-center'>
+
+            <button className= {`${ type === "phone" ? " bg-blue-500":"" } w-[50px] h-[50px] rounded-lg`} 
+            onClick={()=>{ setType('phone')}}><BsTelephonePlus className='w-[50px] h-[18px]'/></button>
+
+            <button className= {`${ type === "email" ? " bg-blue-500":"" } w-[50px] h-[50px] rounded-lg`}
+             onClick={()=>{ setType('email')}}> <HiOutlineMail className='w-[50px] h-[18px]'/> </button>
+
+        </div>
+
         <Type onNext={onNext}/>
+        
+
+         </div>
+
+
+
+    </div>
+
+     
     </>
   ) 
 }
