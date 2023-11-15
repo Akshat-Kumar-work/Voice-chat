@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 
-exports.generateOtp = async ()=>{
-    console.log("inside otp")
+exports.generateOtp =  ()=>{
+   
     return crypto.randomInt(1000, 9999);
 }
