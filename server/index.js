@@ -15,3 +15,7 @@ server.listen(PORT , ()=>{
     console.log("server started");
 })
 
+server.get("/",(req ,res)=>{
+    res.send("working")
+})
+
