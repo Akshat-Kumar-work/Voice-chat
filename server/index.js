@@ -6,7 +6,7 @@ require("dotenv").config();
 
 
 server.use(express.json());
-server.use(router);
+server.use("/api/v1",router);
 
 
 const PORT = process.env.PORT || 3000;

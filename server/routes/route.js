@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {sendotp} = require("../controllers/sendOtp");
 
-router.post("/api/v1/sendOtp",sendotp);
+router.post("/sendOtp",sendotp);
 
 
 
