@@ -17,7 +17,7 @@ exports.sendotp = async(req ,res)=>{
  
      const otp =  generateOtp();
 
-     const data = `${email}.${otp}`;
+     const data = otp;
     
      const hashed =  hash(data);
     
