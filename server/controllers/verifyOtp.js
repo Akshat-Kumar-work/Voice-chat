@@ -10,6 +10,13 @@ exports.verifyOtp = async (req, res)=>{
     const hashedOtp = hash(parseInt(otp));
  
     const findOtp = await Otp.findOne({otp:hashedOtp})
+
+    if(!findOtp){
+        return res.status(400).json({
+            success:false,
+            message:"wrong otp"
+        })
+    }
    
 
     return res.status(200).json({
