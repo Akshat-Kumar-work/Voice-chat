@@ -5,7 +5,8 @@ const Otp = require('../models/otp');
 exports.verifyOtp = async (req, res)=>{
 
     try{
-        const {otp} = req.body;
+        
+    const {otp} = req.body;
 
     const hashedOtp = hash(parseInt(otp));
  
@@ -17,6 +18,9 @@ exports.verifyOtp = async (req, res)=>{
             message:"wrong otp"
         })
     }
+
+    //after otp verification user will be created 
+    
    
 
     return res.status(200).json({
