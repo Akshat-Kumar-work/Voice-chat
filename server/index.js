@@ -7,6 +7,9 @@ require("dotenv").config();
 server.use(express.json());
 server.use("/api/v1",router);
 
+const cors = require('cors');
+server.use(cors({origin:"http://localhost:3000",credentials:true}));
+
 
 const PORT = process.env.PORT || 3000;
 
