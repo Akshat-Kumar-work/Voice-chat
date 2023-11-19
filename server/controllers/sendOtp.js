@@ -16,8 +16,8 @@ exports.sendotp = async(req ,res)=>{
      }
  
      const otp =  generateOtp();
-
-     const data = otp;
+     console.log("generated otp",otp);
+          const data = otp;
     
      const hashed =  hash(data);
     
