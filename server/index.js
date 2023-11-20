@@ -4,14 +4,20 @@ const server = express();
 const {dbConnect} = require('./config/dbConnect');
 require("dotenv").config();
 
+//cors hume  sabse phle use krna hai baaki middlewares se
+const cors = require("cors");
+server.use( cors({origin:"*" , credentials:true}));
+
+
+
 server.use(express.json());
 server.use("/api/v1",router);
 
-const cors = require('cors');
-server.use(cors({origin:"http://localhost:3000",credentials:true}));
 
 
-const PORT = process.env.PORT || 3000;
+
+
+const PORT = process.env.PORT || 5000;
 
 server.listen(PORT , ()=>{
     console.log("server started");
