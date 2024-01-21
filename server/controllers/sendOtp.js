@@ -26,9 +26,12 @@ exports.sendotp = async(req ,res)=>{
      const storingOtp = await Otp.create(otpBody);
      console.log(storingOtp)
 
-     //sending otp by mail
-     const info = await mailSender(email , otp);
-     console.log(info)
+     //sending otp by mail after otp saved in db
+     if(storingOtp){
+        const info = await mailSender(email , otp);
+        console.log(info)
+     }
+  
    
      return res.status(200).json({
          success:true,

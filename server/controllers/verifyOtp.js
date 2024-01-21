@@ -1,7 +1,7 @@
 const {hash} = require("../utils/hashing")
 const Otp = require('../models/otp');
 const User = require('../models/user');
-
+const tokenService = require('../utils/tokenGenerate');
 
 exports.verifyOtp = async (req, res)=>{
 
@@ -28,25 +28,32 @@ exports.verifyOtp = async (req, res)=>{
     }
 
     //after otp verification user will be created 
-    const user = await User.findOne({email});
-    if(user){
-        return res.status(400).json({
-            success:false,
-            message:"user already exist"
-        })
+    let user = await User.findOne({email});
+
+    if(!user){
+        //creating user if not exist 
+     user = await User.create({email});
+
     }
-
-    const createdUser = User.create({email});
-
-    console.log(createdUser)
   
+    const payload = {
+        _id: user._id,
+        activated:false
+    }
     
-   
+    //Tokens
+    const {accessToken , refreshToken } = tokenService.GenerateToken(payload);
 
-    return res.status(200).json({
-        success:true,
-        message: "otp verification done and user created"
-    })
+  res.cookie('refreshtoken', refreshToken ,{
+    expiresIn:new Date(Date.now()+3*24*60*60*1000),
+    httpOnly: true
+   }).status(200).json({
+    success:true,
+    accessToken: accessToken,
+    user : user,
+    message: "otp verification done and user created"
+})
+
     
  
     }
