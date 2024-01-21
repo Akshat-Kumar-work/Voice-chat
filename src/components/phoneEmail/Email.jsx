@@ -4,14 +4,15 @@ import Card from "../shared/card"
 import { useState } from 'react'
 import TextInput from '../shared/TextInput'
 import {sendOtp} from "../../services/apiOperations";
+import { useDispatch } from 'react-redux'
 
 const Email = ({onNext}) => {
+  const dispatch  = useDispatch();
   const [email , setemail] = useState('');
 
   function onSubmit (){
   localStorage.setItem('email',JSON.stringify(email));
-   sendOtp(email);
-
+    dispatch( sendOtp(email));
     onNext();
 
   }

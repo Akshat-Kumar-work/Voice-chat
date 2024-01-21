@@ -4,16 +4,17 @@ import {BsFillArrowRightCircleFill } from "react-icons/bs";
 import { BiSolidLock } from "react-icons/bi";
 import TextInput from '../../components/shared/TextInput';
 import { verifyOtp } from '../../services/apiOperations';
-
+import { useDispatch,useSelector } from 'react-redux';
 
 const StepOtp = ({onNext}) => {
-
+  const email = useSelector( (state)=>state.auth.email);
+  const dispatch = useDispatch();
   const [otp , setOtp] = useState('');
 
   function onSubmit (){
 
-    verifyOtp(otp);
-
+    dispatch( verifyOtp(otp , email))
+  
     onNext();
   }
 

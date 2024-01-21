@@ -10,7 +10,10 @@ import Activate from './pages/Activate';
 import ProtectedRoute from './components/Routes/ProtectedRoute';
 import Rooms from './pages/Rooms';
 
+
 function App() {
+
+
   return (
 
     <div >

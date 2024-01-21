@@ -6,8 +6,9 @@ const tokenService = require('../utils/tokenGenerate');
 exports.verifyOtp = async (req, res)=>{
 
     try{
-        
+      
     const {otp , email} = req.body;
+   
 
     if(!otp || !email){
         return res.status(400).json({
