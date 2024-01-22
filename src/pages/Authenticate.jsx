@@ -5,8 +5,7 @@ import StepOtp from './Steps/StepOtp';
 
 const Steps = {
     1: StepPhoneEmail,
-    2: StepOtp,
-    3: StepPhoneEmail
+    2: StepOtp
 }
 
 const Authenticate = () => {

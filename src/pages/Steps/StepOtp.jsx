@@ -6,7 +6,7 @@ import TextInput from '../../components/shared/TextInput';
 import { verifyOtp } from '../../services/apiOperations';
 import { useDispatch,useSelector } from 'react-redux';
 
-const StepOtp = ({onNext}) => {
+const StepOtp = () => {
   const email = useSelector( (state)=>state.auth.email);
   const dispatch = useDispatch();
   const [otp , setOtp] = useState('');
@@ -14,8 +14,7 @@ const StepOtp = ({onNext}) => {
   function onSubmit (){
 
     dispatch( verifyOtp(otp , email))
-  
-    onNext();
+
   }
 
 

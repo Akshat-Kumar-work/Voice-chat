@@ -1,10 +1,11 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 
-const isAuth = false;
 
 const OpenRoute = ({children}) => {
+    const {isAuth} = useSelector( (state)=>state.auth);
 
     if (isAuth){
         return <Navigate to="/rooms"/>
