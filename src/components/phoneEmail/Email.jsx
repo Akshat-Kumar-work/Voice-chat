@@ -11,7 +11,6 @@ const Email = ({onNext}) => {
   const [email , setemail] = useState('');
 
   function onSubmit (){
-  localStorage.setItem('email',JSON.stringify(email));
     dispatch( sendOtp(email));
     onNext();
 

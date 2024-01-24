@@ -7,14 +7,13 @@ import { verifyOtp } from '../../services/apiOperations';
 import { useDispatch,useSelector } from 'react-redux';
 
 const StepOtp = () => {
+  console.log("inside step otp")
   const email = useSelector( (state)=>state.auth.email);
   const dispatch = useDispatch();
   const [otp , setOtp] = useState('');
 
   function onSubmit (){
-
-    dispatch( verifyOtp(otp , email))
-
+    dispatch( verifyOtp(otp , email));
   }
 
 

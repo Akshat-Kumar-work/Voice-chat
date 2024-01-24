@@ -5,9 +5,10 @@ const {mailSender} = require("../utils/mailSender");
 const Otp = require('../models/otp');
 
 exports.sendotp = async(req ,res)=>{
-
+console.log("inside send otp from server")
    try{
     const { email } = req.body;
+    console.log(email)
     if(!email){
          return res.status(400).json({
              success:false,
