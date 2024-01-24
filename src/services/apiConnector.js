@@ -2,9 +2,10 @@ import axios from "axios"
 
 export const axiosInstance = axios.create({});
 
-export const apiConnector =  (method , url , bodyData , headers , params)=>{
+export const apiConnector =  (method , url , bodyData , headers, params)=>{
 
     console.log("inside api connnector")
+
   
     return axiosInstance( {
         method:`${method}`,
