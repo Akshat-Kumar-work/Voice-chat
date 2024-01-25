@@ -1,7 +1,7 @@
 import {apiConnector} from '../services/apiConnector';
 import {allEndPoints} from '../services/apiEndPoints';
 import { setEmail, setUser } from '../store/authSlice';
-
+import { setAvatar,setName } from '../store/activateSlice';
 
 
 
@@ -49,7 +49,12 @@ export function activateUser(formData ,userName){
             "Content-Type":"multipart/form-data"
          });
          console.log("activate user result",result);
-         //dispatch(setUser(result.data.user))
+         if(result.data.auth){
+            dispatch(setUser(result.data.UpdatedUser));
+            dispatch(setAvatar(result.data.UpdatedUser.avatar));
+            dispatch(setName(result.data.UpdatedUser.userName))
+         }
+        
      }
      catch(err){
          console.log(err);

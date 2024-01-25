@@ -38,7 +38,8 @@ try{
         res.json({
             success:true,
             message:"user activated",
-            UpdatedUser: latestUser
+            UpdatedUser: latestUser,
+            auth:true
         })
     
 }

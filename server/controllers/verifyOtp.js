@@ -48,7 +48,7 @@ exports.verifyOtp = async (req, res)=>{
     const {accessToken , refreshToken } = tokenService.GenerateToken(payload);
 
     //storing refresh token in db
-  //  const StoringRefreshToken = await Token.create({token:refreshToken, userId:user._id});
+   const StoringRefreshToken = await Token.create({token:refreshToken, userId:user._id});
     
     
   res.cookie('accessToken',accessToken,

@@ -2,12 +2,8 @@ import React from 'react'
 import { Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 
-const isAuth = true;
-const user = {
-    activated: false
-}
 const SemiProtectedRoute = ({children}) => {
-  //const {isAuth , user} = useSelector( (state)=>state.auth);
+  const {isAuth , user} = useSelector( (state)=>state.auth);
 
 
     console.log("inside semi protected")
