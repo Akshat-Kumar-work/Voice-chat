@@ -20,7 +20,7 @@ server.use(fileUpload({
 
 //cors hume  sabse phle use krna hai baaki middlewares se
 const cors = require("cors");
-server.use( cors({origin:'http://localhost:3000' , credentials:true ,allowedHeaders: 'Content-Type, Authorization'}));
+server.use( cors({origin:'http://localhost:3000' , credentials:true }));
 
 server.use(bodyParser.json({ limit: '10mb' }));
 server.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));

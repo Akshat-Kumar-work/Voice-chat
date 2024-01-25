@@ -2,7 +2,7 @@ require("dotenv").config();
 const jwt = require('jsonwebtoken')
 
 exports.checkAuthentication = async(req,res,next)=>{
-    console.log("cookies",req.cookies)
+
     try{
         const accessToken = req.cookies.accessToken;
 

@@ -3,16 +3,16 @@ const User = require('../models/user');
 
 exports.activateUser = async (req,res)=>{
 try{
-    const {name , user , avatar} = req.body;
 
-  //  const avatar = req.files.avatar
+    const name = req.body.userName;
+    const avatar = req.files.avatar;
+    const {user} = req.body;
 
-
-    // if(!name || !avatar){
-    //     return res.status(400).json({
-    //         success:false,
-    //         mess: "data in not completed"
-    //     })}
+    if(!name || !avatar){
+        return res.status(400).json({
+            success:false,
+            mess: "data in not completed"
+        })}
 
         const uploadImg = await ImageUploaderToCloudinary(avatar , process.env.FOLDER_NAME , 1000,1000);
 

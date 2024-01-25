@@ -39,12 +39,15 @@ export  function verifyOtp(otp , email){
 
 }
 
-export function activateUser(name,image){
-    console.log("inside activate user from api operations")
+export function activateUser(formData ,userName){
+    console.log("inside img string of api operations",{formData,userName})
+
     return async(dispatch)=>{
      try{
-
-         const result = await apiConnector('POST',allEndPoints.ACTIVATE_USER,{name:name, avatar:image});
+        formData.append("userName",userName)
+         const result = await apiConnector('POST',allEndPoints.ACTIVATE_USER,formData,{
+            "Content-Type":"multipart/form-data"
+         });
          console.log("activate user result",result);
          //dispatch(setUser(result.data.user))
      }

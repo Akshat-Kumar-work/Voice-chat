@@ -7,27 +7,38 @@ import {setAvatar} from '../../store/activateSlice'
 import {activateUser} from '../../services/apiOperations';
 
 const StepAvatar = ({onNext}) => {
-  const {userName , avatar} = useSelector(state=>state.activate);
-  const [img , setImg] = useState('/profile-img.jpg');
-  const [imgString , setimgString] = useState('');
+
+
+  const {userName } = useSelector(state=>state.activate);
+  const [previewImg , setPreviewImg] = useState('/profile-img.jpg');
+  const [fileImg , setFileImg] = useState(null);
   const dispatch = useDispatch();
 
   function nextStep(){
-    dispatch(activateUser(userName,imgString));
+    const formData = new FormData();
+    formData.append("avatar",fileImg);
+
+    dispatch(activateUser(formData , userName));
     //onNext();
-  }
+  };
+
+
+   
 
   function fileHandler(e){
+
     const file = e.target.files[0];
-    console.log("img file",file)
     if(file){
-      setimgString(file)
+      setFileImg(file);
+
     }
+    
+      //reading file for preview
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = function(){
-      setImg(reader.result);
-     dispatch( setAvatar(imgString))
+      setPreviewImg(reader.result);
+     dispatch( setAvatar(previewImg))
     }
     console.log(file)
   }
@@ -42,7 +53,7 @@ const StepAvatar = ({onNext}) => {
 
                               para1={"How's this image?"}
                            
-                              img = { <img src={img} alt='image' className=' rounded-full border-4 border-[#0077ff] w-[150px] '/>}
+                              img = { <img src={previewImg} alt='image' className=' rounded-full border-4 border-[#0077ff] w-[150px] '/>}
                               
                           
 
