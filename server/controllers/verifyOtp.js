@@ -48,16 +48,18 @@ exports.verifyOtp = async (req, res)=>{
     const {accessToken , refreshToken } = tokenService.GenerateToken(payload);
 
     //storing refresh token in db
-    const StoringRefreshToken = await Token.create({token:refreshToken, userId:user._id});
-    console.log(StoringRefreshToken)
-
+  //  const StoringRefreshToken = await Token.create({token:refreshToken, userId:user._id});
     
-  res.cookie('accessToken',accessToken,{ expiresIn:new Date(Date.now()+3*24*60*60*1000) , httpOnly:true});
+    
+  res.cookie('accessToken',accessToken,
+  { expiresIn:new Date(Date.now()+3*24*60*60*1000) , httpOnly:true ,sameSite:'None',secure:true });
 
 
   res.cookie('refreshtoken', refreshToken ,{
     expiresIn:new Date(Date.now()+3*24*60*60*1000),
-    httpOnly: true
+    httpOnly: true,
+    sameSite:'None',
+    secure: true
    }).status(200).json({
     success:true,
     user : user,

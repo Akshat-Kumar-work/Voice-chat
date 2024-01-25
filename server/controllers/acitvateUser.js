@@ -3,9 +3,9 @@ const User = require('../models/user');
 
 exports.activateUser = async (req,res)=>{
 try{
-    const {name , user} = req.body;
+    const {name , user , avatar} = req.body;
 
-    const avatar = req.files.avatar
+  //  const avatar = req.files.avatar
 
 
     // if(!name || !avatar){

@@ -13,7 +13,7 @@ const StepAvatar = ({onNext}) => {
   const dispatch = useDispatch();
 
   function nextStep(){
-    dispatch(activateUser(userName,img));
+    dispatch(activateUser(userName,imgString));
     //onNext();
   }
 
