@@ -16,9 +16,15 @@ const StepAvatar = ({onNext}) => {
 
   function nextStep(){
     const formData = new FormData();
-    formData.append("avatar",fileImg);
+    if(fileImg){
+      formData.append("avatar",fileImg);
+      dispatch(activateUser(formData , userName));
+    }
+    else{
+      formData.append("avatar",previewImg);
+      dispatch(activateUser(formData,userName))
+    }
 
-    dispatch(activateUser(formData , userName));
     //onNext();
   };
 
