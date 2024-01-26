@@ -9,12 +9,15 @@ import SemiProtectedRoute from './components/Routes/SemiProtectedRoute';
 import Activate from './pages/Activate';
 import ProtectedRoute from './components/Routes/ProtectedRoute';
 import Rooms from './pages/Rooms';
+import { useLoadingWithRefresh } from './hooks/userLoadingWithRefresh';
+
 
 
 function App() {
 
+const {loading} =  useLoadingWithRefresh();
 
-  return (
+  return loading ? "loading....." :  (
 
     <div >
 

@@ -7,7 +7,6 @@ import { setAvatar,setName } from '../store/activateSlice';
 
 
 
-
 export  function  sendOtp (email ){
 
     console.log("inside send otp from api operations")
@@ -59,6 +58,24 @@ export function activateUser(formData ,userName){
      catch(err){
          console.log(err);
      }
+    }
+}
+
+export function logoutUser(){
+    return async(dispatch)=>{
+        try{
+            const logoutData = await apiConnector('POST',allEndPoints.LOGOUT_USER);
+            if(logoutData){
+                dispatch(setUser(null));
+                dispatch(setAvatar(''));
+                dispatch(setName(''));
+                dispatch(setEmail(''));
+            }
+            
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 }
 

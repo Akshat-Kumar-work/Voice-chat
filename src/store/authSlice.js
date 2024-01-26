@@ -12,7 +12,12 @@ export const authSlice = createSlice({
     reducers:{
         setUser:(state,action)=>{
             state.user = action.payload;
-            state.isAuth = true;
+            if(action.payload === null){
+                state.isAuth = false;
+            }
+            else{
+                state.isAuth = true;
+            }
         },
         setEmail:(state,action)=>{
             state.email = action.payload
