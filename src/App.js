@@ -19,7 +19,7 @@ const {loading} =  useLoadingWithRefresh();
 
   return loading ? "loading....." :  (
 
-    <div >
+    <div className='min-h-screen w-screen' >
 
     <Navigation/>
 
