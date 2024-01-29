@@ -4,12 +4,14 @@ const User = require('../models/user');
 const tokenService = require('../utils/tokenGenerate');
 const Token = require('../models/refresh');
 
+
 exports.verifyOtp = async (req, res)=>{
 
     console.log("inside verify otp from server controller")
     try{
       
     const {otp , email} = req.body;
+   
    
 
     if(!otp || !email){

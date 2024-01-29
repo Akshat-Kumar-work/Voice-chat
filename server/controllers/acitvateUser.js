@@ -1,28 +1,35 @@
 const {ImageUploaderToCloudinary} = require('../utils/imageUploader');
 const User = require('../models/user');
 
+
 exports.activateUser = async (req,res)=>{
+    
 try{
 
     const name = req.body.userName;
-    const avatar = req.files.avatar;
+    const avatar = req.files.avatar ;
+   
     const {user} = req.body;
-
-    if(!name || !avatar){
+  
+    if(!name ){
         return res.status(400).json({
             success:false,
             mess: "data in not completed"
         })}
 
+      
+
+
         const uploadImg = await ImageUploaderToCloudinary(avatar , process.env.FOLDER_NAME , 1000,1000);
 
         //getting user id from the req which we got from payload and put it into req while verifying the token in auth middlewares
         const userId = user._id;
+        
 
         const userResponse = await User.findByIdAndUpdate(userId , {
          activated :true,
          userName : name,
-          avatar : uploadImg.secure_url
+          avatar : uploadImg.secure_url ? uploadImg.secure_url: `https://api.dicebear.com/5.x/initials/svg?seed=${name}`
     
         });
 

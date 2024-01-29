@@ -3,18 +3,23 @@ const {generateOtp} = require("../utils/otpGenerate");
 const {hash} = require("../utils/hashing")
 const {mailSender} = require("../utils/mailSender");
 const Otp = require('../models/otp');
+const zod = require("zod");
 
 exports.sendotp = async(req ,res)=>{
 console.log("inside send otp from server")
    try{
+    const emailSchema = zod.string().email();
     const { email } = req.body;
-    console.log(email)
-    if(!email){
-         return res.status(400).json({
-             success:false,
-             message:"data not found"
-         })
-     }
+    const response = emailSchema.parse(email);
+    //console.log("response string",response)
+    
+
+    // if(!response){
+    //      return res.status(400).json({
+    //          success:false,
+    //          message:response.message
+    //      })
+    //  }
  
      const otp =  generateOtp();
      console.log("generated otp",otp);

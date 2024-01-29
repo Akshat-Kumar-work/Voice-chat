@@ -57,7 +57,7 @@ const StepAvatar = ({onNext}) => {
                            headingLogo={<IoLogoReddit />}
                                   heading={ `Hi' ${userName}!`}
 
-                              para1={"How's this image?"}
+                              para1={"Please update you profile pic"}
                            
                               img = { <img src={previewImg} alt='image' className=' rounded-full border-4 border-[#0077ff] w-[150px] '/>}
                               

@@ -11,7 +11,7 @@ export function useLoadingWithRefresh(){
     (async ()=>{
         try{
        const {data}=  await axios.post(`${process.env.REACT_APP_BASE_URL}/api/refresh`,{},{withCredentials:true});
-       console.log(data)
+       console.log("data in side refresh",data)
         dispatch(setUser(data.user));
         dispatch(setAvatar(data.user.avatar));
         dispatch(setName(data.user.userName))

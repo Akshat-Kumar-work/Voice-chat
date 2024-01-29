@@ -21,7 +21,7 @@ const StepPhoneEmail = ({onNext}) => {
   return(
     <>
 
-    <div className='flex items-center justify-center top-[6rem]'>
+    <div className='flex items-center justify-center  mt-7 '>
 
          <div >
 

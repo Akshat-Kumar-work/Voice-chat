@@ -29,7 +29,11 @@ export  function verifyOtp(otp , email){
     try{
         const result = await apiConnector('POST',allEndPoints.VERIFY_OTP,{otp:otp , email:email});
         console.log(result);
-        dispatch(setUser(result.data.user))
+        dispatch(setUser(result.data.user));
+        if(result.data.user.activated){
+            dispatch(setAvatar(result.data.user.avatar));
+            dispatch(setName(result.data.user.userName))
+        }
     }
     catch(err){
         console.log(err);

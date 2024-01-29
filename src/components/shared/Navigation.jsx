@@ -7,28 +7,40 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const Navigation = () => {
   const dispatch = useDispatch();
-  const {isAuth} = useSelector((state)=>state.auth)
+  const {isAuth} = useSelector((state)=>state.auth);
+  const {userName,avatar} = useSelector( (state)=>state.activate)
   function logout(){
     dispatch(logoutUser());
   }
   return (
-    <div className=' flex justify-between pt-10 mt-40' >  
+    <div className=' flex justify-between pt-5  bg-[#2f3238] items-center '  >  
 
-    <nav className=' flex flex-row  pt-[20px] pb-[20px] justify-evenly  w-[100%]'>
-     <div>
-      
-     </div>
+    <nav className=' flex flex-row  pt-[2px] pb-[20px] justify-evenly  w-[100%]'>
      
-     <div>
-      <Link to="/" >
-      <MdOutlineKeyboardVoice className=' w-[30px] h-[30px] '/>
+     
+     <div  >
+      <Link to="/" className='flex items-center'>
+      <MdOutlineKeyboardVoice className=' w-[40px] h-[45px] '/>
+      <div> Voice Chat</div>
       </Link>
-      Voice Chat
 
      </div>
+
 
     <div >
+     
+
+     <Link to="/" className='flex items-center space-x-2'> 
+    { avatar? <img src={avatar} className=' w-[50px] h-[45px] object-cover rounded-full border-4 border-[#0077ff]'></img> : <> </>}
+    <h3>{userName}</h3>
+     </Link>
+
+     </div>
+
+     <div className=' items-center'>
+ 
     {isAuth ?<button onClick={logout}>Logout</button>: <></>}
+
     </div>
 
    
