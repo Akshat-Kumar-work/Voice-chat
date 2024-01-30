@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RiUserSearchLine } from "react-icons/ri";
 import { MdAddIcCall } from "react-icons/md";
 import RoomCard from '../components/RoomCard';
+import AddRoomModal from '../components/AddRoomModal';
 
 const rooms = [
 
@@ -94,6 +95,10 @@ const rooms = [
 ]
 
 const Rooms = () => {
+  const [showModal , setShowModal] = useState(false);
+  function openModal(){
+    setShowModal(true);
+  }
   return (
     <div className='flex flex-col w-11/12  p-7  m-2'>
 
@@ -114,7 +119,7 @@ const Rooms = () => {
     </div>
 
     {/* right side*/}
-     <button  className='flex items-center space-x-2 bg-green-600 rounded-lg p-3 '>
+     <button onClick={openModal}  className='flex items-center space-x-2 bg-green-600 rounded-lg p-3 '>
      <MdAddIcCall/>
     <div> Start a Room</div>
      </button>
@@ -135,7 +140,7 @@ const Rooms = () => {
     }
     </div>
 
-
+    {showModal && <AddRoomModal setShowModal={()=>setShowModal(false)}/>}
 
     </div>
   )
