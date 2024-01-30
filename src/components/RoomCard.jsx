@@ -1,14 +1,19 @@
 import React from 'react'
 import { IoIosPeople } from "react-icons/io";
 import { TfiThought } from "react-icons/tfi";
+import { useNavigate } from 'react-router-dom';
 
 const RoomCard = ({room}) => {
+  const navigate = useNavigate()
   return (
-    <div className=' bg-[#1d1d1d] space-y-2 p-[20px]  mt-4  rounded-xl'>
+    <div onClick={()=>navigate(`/room/:${room._id}`)}
+    className=' bg-[#1d1d1d] space-y-2 p-[20px]  mt-4  rounded-xl'>
 
       <div>{room.topic}</div>
       
-     <div className=' flex md:flex-row flex-col justify-between items-center'>
+      {/* speakers */}
+     <div className={ room.speakers.length === 1 ? " flex flex-col justify-between items-center space-y-2 ": ` flex md:flex-row flex-col justify-between items-center `}>
+
        {/* img */}
        <div className=' mt-2  rounded-full'>
       {room.speakers.map( (singlePerson)=>{
