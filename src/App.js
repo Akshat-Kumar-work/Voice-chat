@@ -10,6 +10,7 @@ import Activate from './pages/Activate';
 import ProtectedRoute from './components/Routes/ProtectedRoute';
 import Rooms from './pages/Rooms';
 import { useLoadingWithRefresh } from './hooks/userLoadingWithRefresh';
+import CreatedRoom from './pages/CreatedRoom';
 
 
 
@@ -34,6 +35,8 @@ const {loading} =  useLoadingWithRefresh();
 
     {/* protected */}
     <Route path="/rooms" element={<ProtectedRoute> <Rooms/> </ProtectedRoute>} />
+    <Route path="/room/:id" element={<ProtectedRoute> <CreatedRoom/> </ProtectedRoute>} />
+
     
 
 

@@ -100,7 +100,7 @@ const Rooms = () => {
     setShowModal(true);
   }
   return (
-    <div className='flex flex-col w-11/12  p-7  m-2'>
+    <div className='flex flex-col w-11/12  p-7  m-2  inset-0'>
 
     {/* header */}
     <div className='flex md:flex-row flex-col items-center  justify-between w-11/12  max-w-[1260px] h-[59px] '>

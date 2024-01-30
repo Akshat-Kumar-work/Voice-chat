@@ -83,6 +83,10 @@ export function logoutUser(){
     }
 }
 
+export function createRoom(type,topic){
+
+}
+
 
 
 

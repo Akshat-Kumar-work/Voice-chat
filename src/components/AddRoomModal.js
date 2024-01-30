@@ -3,12 +3,17 @@ import TextInput from "./shared/TextInput";
 import { IoEarth } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
 import { IoLockClosed } from "react-icons/io5";
+import { createRoom } from '../services/apiOperations';
 
 const AddRoomModal = ({setShowModal}) => {
     const [roomType , setRoom] = useState('open');  
     const [topic , setTopic] = useState('');  
 
-    function createRoom(){
+    function CreateRoom(){
+      if(!topic){
+        return;
+      }
+      createRoom(roomType,topic);
         
     }
 
@@ -52,7 +57,7 @@ const AddRoomModal = ({setShowModal}) => {
     {/* Footer */}
         <div className=' flex md:flex-row flex-col  items-center justify-evenly p-3'>
             Start a room, open to everyone
-            <button onClick={createRoom} className=' bg-green-600 rounded-lg p-3'>Let's Go</button>
+            <button onClick={CreateRoom} className=' bg-green-600 rounded-lg p-3'>Let's Go</button>
         </div>
         
 
