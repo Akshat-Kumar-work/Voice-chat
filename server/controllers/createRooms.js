@@ -15,7 +15,7 @@ exports.createRooms = async (req,res)=>{
 
         const room = await Room.create({
             topic:topic,
-            userId:userId,
+            ownerId:userId,
             roomType:type,
             speakers:[userId]
         })
@@ -35,5 +35,25 @@ exports.createRooms = async (req,res)=>{
             mess:"unable to create room"
         })
 
+    }
+}
+
+
+exports.fetchRooms = async(req,res)=>{
+    try{
+        const resposne = await Room.find({roomType:"open"}).populate("speakers").populate("ownerId").exec();
+        
+        return res.status(200).json({
+            success:true,
+            mess:"room fetched successfully",
+            roomsList:resposne
+        })
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json({
+            success:false,
+            mess:"unable to fetch rooms"
+        })
     }
 }

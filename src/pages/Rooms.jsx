@@ -1,104 +1,115 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RiUserSearchLine } from "react-icons/ri";
 import { MdAddIcCall } from "react-icons/md";
 import RoomCard from '../components/RoomCard';
 import AddRoomModal from '../components/AddRoomModal';
+import { fetchRooms } from '../services/apiOperations';
+import { useDispatch, useSelector } from 'react-redux';
 
-const rooms = [
+// const rooms = [
 
-  {
-    id:1,
-    topic: "Which framework best for fronend?",
-    speakers:[
-      {
-        id:1,
-        name:"akshat",
-        avatar:"/profile-img.jpg"
-      },
-      {
-        id:2,
-        name:"himanshi",
-        avatar:"/profile-img.jpg"
-      }
-    ],
-    totalPeople:40
-  },
-  {
-    id:2,
-    topic: "Which framework best for fronend?",
-    speakers:[
-      {
-        id:1,
-        name:"akshat",
-        avatar:"/profile-img.jpg"
-      },
-      {
-        id:2,
-        name:"himanshi",
-        avatar:"/profile-img.jpg"
-      }
-    ],
-    totalPeople:40
-  },
-  {
-    id:3,
-    topic: "Which framework best for fronend?",
-    speakers:[
-      {
-        id:1,
-        name:"akshat",
-        avatar:"/profile-img.jpg"
-      },
-      {
-        id:2,
-        name:"himanshi",
-        avatar:"/profile-img.jpg"
-      }
-    ],
-    totalPeople:40
-  },
-  {
-    id:4,
-    topic: "Which framework best for fronend?",
-    speakers:[
-      {
-        id:1,
-        name:"akshat",
-        avatar:"/profile-img.jpg"
-      },
-      {
-        id:2,
-        name:"himanshi",
-        avatar:"/profile-img.jpg"
-      }
-    ],
-    totalPeople:40
-  },
-  {
-    id:5,
-    topic: "Which framework best for fronend?",
-    speakers:[
-      {
-        id:1,
-        name:"akshat",
-        avatar:"/profile-img.jpg"
-      },
-      {
-        id:2,
-        name:"himanshi",
-        avatar:"/profile-img.jpg"
-      }
-    ],
-    totalPeople:40
-  },
+//   {
+//     id:1,
+//     topic: "Which framework best for fronend?",
+//     speakers:[
+//       {
+//         id:1,
+//         name:"akshat",
+//         avatar:"/profile-img.jpg"
+//       },
+//       {
+//         id:2,
+//         name:"himanshi",
+//         avatar:"/profile-img.jpg"
+//       }
+//     ],
+//     totalPeople:40
+//   },
+//   {
+//     id:2,
+//     topic: "Which framework best for fronend?",
+//     speakers:[
+//       {
+//         id:1,
+//         name:"akshat",
+//         avatar:"/profile-img.jpg"
+//       },
+//       {
+//         id:2,
+//         name:"himanshi",
+//         avatar:"/profile-img.jpg"
+//       }
+//     ],
+//     totalPeople:40
+//   },
+//   {
+//     id:3,
+//     topic: "Which framework best for fronend?",
+//     speakers:[
+//       {
+//         id:1,
+//         name:"akshat",
+//         avatar:"/profile-img.jpg"
+//       },
+//       {
+//         id:2,
+//         name:"himanshi",
+//         avatar:"/profile-img.jpg"
+//       }
+//     ],
+//     totalPeople:40
+//   },
+//   {
+//     id:4,
+//     topic: "Which framework best for fronend?",
+//     speakers:[
+//       {
+//         id:1,
+//         name:"akshat",
+//         avatar:"/profile-img.jpg"
+//       },
+//       {
+//         id:2,
+//         name:"himanshi",
+//         avatar:"/profile-img.jpg"
+//       }
+//     ],
+//     totalPeople:40
+//   },
+//   {
+//     id:5,
+//     topic: "Which framework best for fronend?",
+//     speakers:[
+//       {
+//         id:1,
+//         name:"akshat",
+//         avatar:"/profile-img.jpg"
+//       },
+//       {
+//         id:2,
+//         name:"himanshi",
+//         avatar:"/profile-img.jpg"
+//       }
+//     ],
+//     totalPeople:40
+//   },
 
-]
+// ]
 
 const Rooms = () => {
   const [showModal , setShowModal] = useState(false);
+  const dispatch = useDispatch();
+ const {rooms} = useSelector( state=>state.rooms);
+
+  useEffect( ()=>{
+   dispatch(fetchRooms());
+  },[])
+
   function openModal(){
     setShowModal(true);
   }
+
+
   return (
     <div className='flex flex-col w-11/12  p-7  m-2  inset-0'>
 
@@ -134,7 +145,7 @@ const Rooms = () => {
     {
       rooms.map( (room)=>{
         return(
-          <RoomCard key={room.id} room={room}/>
+          <RoomCard key={room._id} room={room}/>
         )
       })
     }

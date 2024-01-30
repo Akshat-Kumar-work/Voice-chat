@@ -13,7 +13,7 @@ const RoomCard = ({room}) => {
        <div className=' mt-2  rounded-full'>
       {room.speakers.map( (singlePerson)=>{
           return(       
-            <img key={singlePerson.id} src={singlePerson.avatar} className=' rounded-full w-[50px] border-[3px]  border-[#20bd5f]'/>     
+            <img key={singlePerson._id} src={singlePerson.avatar} className=' rounded-full w-[50px] border-[3px]  border-[#20bd5f]'/>     
           )
         })}
       </div>
@@ -22,8 +22,8 @@ const RoomCard = ({room}) => {
       <div className=' items-center space-x-1 space-y-2'>
       {room.speakers.map( (singlePerson)=>{
           return(   
-            <div key={singlePerson.id} className='flex '>
-            <TfiThought/> {singlePerson.name} 
+            <div key={singlePerson._id} className='flex '>
+            <TfiThought/> {singlePerson.userName} 
             </div>
              
            

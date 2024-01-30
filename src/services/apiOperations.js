@@ -2,7 +2,7 @@ import {apiConnector} from '../services/apiConnector';
 import {allEndPoints} from '../services/apiEndPoints';
 import { setEmail, setUser } from '../store/authSlice';
 import { setAvatar,setName } from '../store/activateSlice';
-
+import { setRooms } from '../store/RoomsSlice';
 
 
 
@@ -100,6 +100,20 @@ export async function  createRoom(type,topic,navigate){
 
 }
 
+export  function fetchRooms(){
+   return async (dispatch)=>{
+    try{
+        const response = await apiConnector('GET',allEndPoints.FETCH_ROOMS);
+        console.log(response);
+        if(response)
+        { dispatch(setRooms(response.data.roomsList))}
+    }
+    catch(err){
+        console.log(err)
+    }
+   }
+    
+}
 
 
 

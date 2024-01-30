@@ -6,7 +6,7 @@ topic:{
     type:String,
     required:true
 },
-userId:{
+ownerId:{
     type:Schema.Types.ObjectId,
     required:true,
     ref: 'User'
