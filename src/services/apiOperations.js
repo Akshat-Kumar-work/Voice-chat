@@ -7,6 +7,7 @@ import { setAvatar,setName } from '../store/activateSlice';
 
 
 
+
 export  function  sendOtp (email ){
 
     console.log("inside send otp from api operations")
@@ -83,7 +84,19 @@ export function logoutUser(){
     }
 }
 
-export function createRoom(type,topic){
+export async function  createRoom(type,topic,navigate){
+    console.log(type,topic)
+    try{
+        const response = await apiConnector('POST',allEndPoints.CREATE_ROOM ,{type,topic});
+        console.log(response);
+        const id = response.data.room._id;
+        if(response){
+            navigate(`/room/:${id}`)
+        }
+    }
+    catch(err){
+        console.log(err); 
+    }
 
 }
 

@@ -5,15 +5,18 @@ exports.createRooms = async (req,res)=>{
     try{
         const Topicschema = zod.string();
         const roomTypeSchema = zod.string();
-        const{topic,roomType} = req.body;
+        const{type,topic} = req.body;
 
         Topicschema.parse(topic);
-        roomTypeSchema.parse(roomType);
+        roomTypeSchema.parse(type);
+
+
+        const userId = req.body.user._id;
 
         const room = await Room.create({
             topic:topic,
-            userId:req.user._id,
-            roomType:roomType,
+            userId:userId,
+            roomType:type,
             speakers:[userId]
         })
         console.log(room);

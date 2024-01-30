@@ -4,16 +4,19 @@ import { IoEarth } from "react-icons/io5";
 import { IoIosPeople } from "react-icons/io";
 import { IoLockClosed } from "react-icons/io5";
 import { createRoom } from '../services/apiOperations';
+import { useNavigate } from 'react-router-dom';
 
 const AddRoomModal = ({setShowModal}) => {
     const [roomType , setRoom] = useState('open');  
     const [topic , setTopic] = useState('');  
+    const navigate = useNavigate();
 
-    function CreateRoom(){
+    function  CreateRoom(){
       if(!topic){
         return;
       }
-      createRoom(roomType,topic);
+      console.log(roomType)
+     createRoom(roomType,topic ,navigate);
         
     }
 
