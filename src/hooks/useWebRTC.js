@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useStateWithCallback } from "./useStateWithCallBack";
+import {socketInIt} from "../socket/index";
+import { ACTIONS } from "../actions";
 
 // const users = [
 //   {
@@ -16,7 +18,17 @@ import { useStateWithCallback } from "./useStateWithCallBack";
 //we are using useStateWithCallback hook on befalf of useState hook which is an custom hook which will provide an call back 
 //fuction which will call after any changes or updation in clients state
 export function  useWebRTC (roomId , user){
-  
+
+
+  //socket vairable
+  const socket = useRef(null);
+
+  useEffect( ()=>{
+    socket.current = socketInIt();
+  },[]);
+
+
+
     const [clients , updateClients] = useStateWithCallback([]);
     
     //audio elements to know the which player is playing of  which user
@@ -53,12 +65,17 @@ export function  useWebRTC (roomId , user){
    
           //after capturing audio make the current user into clients
           addNewClients(user ,()=>{
+            
             const localElement = audioElements.current[user.id];
             console.log("local element",localElement)
             if(localElement){
               localElement.volume = 0;
               localElement.srcObject = localMediaStream.current 
             }
+
+            //socket-> joining client  with web socket
+            socket.current.emit(ACTIONS.JOIN,{roomId,user});
+
           });
         });
     },[])
