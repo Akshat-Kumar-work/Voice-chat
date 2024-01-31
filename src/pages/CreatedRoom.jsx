@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useWebRTC } from '../hooks/useWebRTC';
+
 
 const CreatedRoom = () => {
+  //getting room id from the parameter
+  const {id:roomId} = useParams();
+  //getting logged in user 
+  const {user} = useSelector( (state)=>state.auth);
+
+  //destructuring the clients state from custom client useState
+  const {clients , provideRef} = useWebRTC(roomId,user);
+  console.log("clients",clients)
+
   return (
-    <div>CreatedRoom</div>
+    <div>
+      <h1>All connected clients</h1>
+      {
+        clients.map( (singleClient)=>{
+          return (<div key={singleClient._id}>
+
+            {/* audio element of react to play audio */}
+            {/* providing audio instance and client id to know which user audio is playing */}
+            <audio  ref={ (instance)=>provideRef(instance,singleClient.id) }
+              controls autoPlay ></audio>
+
+            <h4>{singleClient.userName}</h4>
+          </div>)
+        })
+      }
+    </div>
   )
 }
 
