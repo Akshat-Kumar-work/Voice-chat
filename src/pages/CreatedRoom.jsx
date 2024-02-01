@@ -21,8 +21,9 @@ const CreatedRoom = () => {
         clients.map( (singleClient)=>{
           return (<div key={singleClient._id}>
 
-            {/* audio element of react to play audio */}
-            {/* providing audio instance and client id to know which user audio is playing */}
+            {/* audio element of react to play audio-=> single client k lie ek audio Player hi render hoga */}
+            {/* providing audio player instance and client id to know which user audio player it is */}
+            {/* audio player ka instance lelia with client id taki pta chale kis client ka audio player  hai */}
             <audio  ref={ (instance)=>provideRef(instance,singleClient.id) }
               controls autoPlay ></audio>
 

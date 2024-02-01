@@ -8,7 +8,7 @@ const cookie = require('cookie-parser');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 
-//creating server with http instance for sockets
+//creating  http server 
 const server = require('http').createServer(App);
 
 const io = require("socket.io")(server,{

@@ -18,6 +18,7 @@ export const useStateWithCallback  = (initialState)=>{
         callBackRef.current = callback;
 
         setState((prev)=>{return typeof SETstate === 'function' ? SETstate(prev): SETstate})
+
     },[]);
 
     useEffect(()=>{
