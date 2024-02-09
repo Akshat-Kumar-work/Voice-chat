@@ -49,7 +49,7 @@ App.use("/api/v1",router);
 
 const PORT = process.env.PORT || 5000;
 
-//sockets
+//sockets object -> to keep track which socket id belongs to which socket
 const socketUserMapping = {
 
 }
@@ -57,22 +57,38 @@ const socketUserMapping = {
 io.on('connection',(socket)=>{
     console.log('new Connection',socket.id);
 
+    //jab current socket (join event) listen krega toh y krna hai
     socket.on(ACTIONS.JOIN,({roomId , user})=>{
+
+    //saving socket id as key and user as value
     socketUserMapping[socket.id] = user;
-        //getting all clients present in room-> it will return map
+
+        //getting all clients present in current room-> it will return map
+        //io.sockets.adapter.rooms.get(roomId) y return krega jo roomId pass kari hai usme kitne clients connected hai as a map so we are converting map into array
+        //agar koi ni hai toh empty array return krdo, 
         const clients = Array.from (io.sockets.adapter.rooms.get(roomId) || []);
+
+        //for each client present in passed roomId -> emit add-peer custom event for them
         clients.forEach(clientId=>{
+            //emitting add-peer event for each clients present in room from current user or client
             io.to(clientId).emit(ACTIONS.ADD_PEER,{
-                       
+                    peerId:socket.id,
+                    createOffer:false,
+                    user:user
             });
 
-            socket.emit(ACTIONS.ADD_PEER,{});
+
+            //current client or user ko bhi add-event emit kro
+            socket.emit(ACTIONS.ADD_PEER,{
+                peerId: clientId,
+                createOffer:true,
+                user:socketUserMapping[clientId]
+            });
 
             //creating and joining the room from roomId
             socket.join(roomId);
         })
 
-        console.log(clients)
     });
 
 })

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { useStateWithCallback } from "./useStateWithCallBack";
 import {socketInIt} from "../socket/index";
 import { ACTIONS } from "../actions";
+import freeice from "freeice";
 
 // const users = [
 //   {
@@ -52,7 +53,7 @@ export function  useWebRTC (roomId , user){
 
 
     //function to add new client same as updateClients with some conditions
-    const addNewClients = useCallback(
+    const addNewClient = useCallback(
       (newClient ,cb)=>{
         //checking if client already present in clients state 
         const lookingFor = clients.find((client)=>client.id === newClient.id);
@@ -82,7 +83,7 @@ export function  useWebRTC (roomId , user){
         startCapturing().then( ()=>{
    
           //after capturing audio add the current user into clients using addNewClients function which built above to add current client into the clients state
-          addNewClients(user ,()=>{
+          addNewClient(user ,()=>{
 
             //after adding the current client/user into the clients state
             //getting current user audio player by using it Id from audioElements object
@@ -101,6 +102,61 @@ export function  useWebRTC (roomId , user){
 
           });
         });
+
+
+        
+        const handleNewPeer = async ({peerId,createOffer,user:remoteUser})=>{
+
+          //if socket already connected hai toh connect nai krna hai
+          if(peerId in connections.current){
+            return console.warn(`You are alredy connected with ${peerId} ${user.name}`)
+          }
+
+          //RTCPeerConnection is an js class which is used to establish the peer to peer connection between local device and remote peer present in broswser
+          //creating new instance of rtcpeerconnection
+          connections.current [peerId] = new RTCPeerConnection({
+            //freeice library provide current turn and stun server 
+            iceServers: freeice()
+          });
+
+          //handle new ice candidate
+          connections.current[peerId].onicecandidate = (event)=>{
+            socket.current.emit(ACTIONS.RELAY_ICE,{
+              peerId,
+              icecandidate: event.candidate
+            })
+          }
+
+          //handle on track on this connection
+          connections.current[peerId].ontrack = ({ streams:[remoteStream] })=>{
+            addNewClient(remoteUser,()=>{
+              if(audioElements.current[remoteUser.id]){
+                audioElements.current[remoteUser.id].srcObject = remoteStream
+              }
+              else{
+                let settled = false;
+                const interval = setInterval(()=>{
+                  if(audioElements.current[remoteUser.id]){
+                    audioElements.current[remoteUser.id].srcObject = remoteStream;
+                    settled = true;
+                  }
+                  if(settled){
+                    clearInterval(interval);
+                  }
+                },1000)
+              }
+            })
+          }
+
+          //add local track to remote connections
+          localMediaStream.current.getTracks().forEach(track =>{
+            connections.current[peerId].addTrack(track,localMediaStream.current)
+          })
+        }
+
+        socket.current.on(ACTIONS.ADD_PEER,handleNewPeer)
+
+
     },[])
 
 
