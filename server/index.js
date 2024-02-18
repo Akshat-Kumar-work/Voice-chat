@@ -71,6 +71,7 @@ io.on('connection',(socket)=>{
         //for each client present in passed roomId -> emit add-peer custom event for them
         clients?.forEach(clientId=>{
             //emitting add-peer event for each clients present in room for current user or client
+            //jo bhi clients hai phle k room k andar unko add-peer event emit kro jiski peer id hogi current user
             io.to(clientId).emit(ACTIONS.ADD_PEER,{
                     peerId:socket.id,
                     createOffer:false,
@@ -79,17 +80,20 @@ io.on('connection',(socket)=>{
 
 
             //current client or user ko bhi add-event emit kro
+            //jo current user hai usko bhi add peer event emit kro jisme peer id hogi sarree clients jo phle se room m present hai
             socket.emit(ACTIONS.ADD_PEER,{
                 peerId: clientId,
                 createOffer:true,
                 user:socketUserMapping[clientId]
             });
 
+     
            
         });
 
-            //creating and joining the room from roomId
-            socket.join(roomId);
+        console.log("before socket joining the room")
+        //creating and joining the room from roomId
+        socket.join(roomId);
 
     });
 
