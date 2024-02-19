@@ -4,7 +4,7 @@ import { setEmail, setUser } from '../store/authSlice';
 import { setAvatar,setName } from '../store/activateSlice';
 import { setRooms } from '../store/RoomsSlice';
 
-
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 
 
@@ -104,7 +104,7 @@ export  function fetchRooms(){
    return async (dispatch)=>{
     try{
         const response = await apiConnector('GET',allEndPoints.FETCH_ROOMS);
-        console.log(response);
+       
         if(response)
         { dispatch(setRooms(response.data.roomsList))}
     }
@@ -113,6 +113,17 @@ export  function fetchRooms(){
     }
    }
     
+}
+
+export async function getSingleRoom(roomId){
+    try{
+        const result = await apiConnector('GET', BASE_URL+`/api/fetchSingleRoom/${roomId} `)
+        // console.log("data from single room",result.data.data)
+        return result.data.data
+    }
+    catch(err){
+console.log("error while fetching single room",err)
+    }
 }
 
 

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const RoomCard = ({room}) => {
   const navigate = useNavigate()
   return (
-    <div onClick={()=>navigate(`/room/:${room._id}`)}
+    <div onClick={()=>navigate(`/room/${room._id}`)}
     className=' bg-[#1d1d1d] space-y-2 p-[20px]  mt-4  rounded-xl'>
 
       <div>{room.topic}</div>
