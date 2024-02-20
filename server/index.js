@@ -114,6 +114,38 @@ io.on('connection',(socket)=>{
     });
 
 
+    //handle mute and unmute
+    socket.on(ACTIONS.MUTE, ({roomId,userId})=>{
+        const clients  = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
+        clients.forEach( clientId =>{
+            io.to(clientId).emit(ACTIONS.MUTE,{
+                peerId:socket.id , userId
+            });
+        })
+    })
+
+    socket.on(ACTIONS.UN_MUTE, ({roomId,userId})=>{
+        const clients  = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
+        clients.forEach( clientId =>{
+            io.to(clientId).emit(ACTIONS.UN_MUTE,{
+                peerId:socket.id , userId
+            });
+        })
+    })
+
+    socket.on(ACTIONS.MUTE_INFO, ({ userId, roomId, isMute }) => {
+        const clients = Array.from(io.sockets.adapter.rooms.get(roomId) || []);
+        clients.forEach((clientId) => {
+            if (clientId !== socket.id) {
+                console.log('mute info');
+                io.to(clientId).emit(ACTIONS.MUTE_INFO, {
+                    userId,
+                    isMute,
+                });
+            }
+        });
+    });
+
     //leaving the room
     const leaveRoom = ()=>{
         const {rooms} = socket;
@@ -123,8 +155,7 @@ io.on('connection',(socket)=>{
 
         clients.forEach(clientId=>{
             io.to(clientId).emit(ACTIONS.REMOVE_PEER,{peerId:socket.id,userId:socketUserMapping[socket.id]?.id})
-            socket.emit(ACTIONS.REMOVE_PEER,{peerId:clientId,userId:socketUserMapping[clientId]?.id})
-
+           // socket.emit(ACTIONS.REMOVE_PEER,{peerId:clientId,userId:socketUserMapping[clientId]?.id})
            
         })
         socket.leave(roomId)

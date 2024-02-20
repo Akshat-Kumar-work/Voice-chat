@@ -21,12 +21,18 @@ const CreatedRoom = () => {
   const navigate = useNavigate();
 
   //destructuring the clients state from custom client useState
-  const {clients , provideRef} = useWebRTC(roomId,user);
+  const {clients , provideRef, handleMute} = useWebRTC(roomId,user);
 
   
   
   const [roomTopic,setRoomTopic] = useState(null);
 
+
+  const [isMute,setMute] = useState(true);
+
+  useEffect( ()=>{
+    handleMute(isMute , user._id);
+  },[isMute])
 
   useEffect( ()=>{
     const fetchRoom  = async()=>{
@@ -38,6 +44,15 @@ const CreatedRoom = () => {
    
   },[roomId])
 
+  const handleMuteClick = ( clientId)=>{
+
+   
+    //if client id is not current client then do not mute-> preventing others client mute functinonality
+    if(clientId !== user._id){
+      return ;
+    }
+    setMute( (isMute)=> !isMute);
+  }
 
   return (
     <div className='flex flex-col w-11/12  p-7  m-2  inset-0' >
@@ -79,11 +94,21 @@ const CreatedRoom = () => {
               {/* audio element of react to play audio-=> single client k lie ek audio Player hi render hoga */}
               {/* providing audio player instance and client id to know which user audio player it is */}
               {/* audio player ka instance lelia with client id taki pta chale kis client ka audio player  hai */}
-              <audio  ref={ (instance)=>provideRef(instance,singleClient.id) }
+              <audio  ref={ (instance)=>provideRef(instance,singleClient._id) }
                 autoPlay ></audio>
                 <img src={singleClient.avatar} className=' w-[100%] h-[100%] rounded-[50%] '/>
-                <button className=' absolute bottom-0 right-0 w-[30px]  h-[30px] p-[5px]'> <CiMicrophoneOff/> </button>
+
+                {/* mute and un mute */}
+                <button
+                 onClick={()=> handleMuteClick(singleClient._id)} className=' absolute bottom-0 right-0 w-[30px]  h-[30px] p-[5px]'>
+
+                    {singleClient.muted ? (<CiMicrophoneOff/>) : (<CiMicrophoneOn/>)}
+
+                  </button>
+
               </div>
+
+
 
               <h4 className=' mt-[1rem] font-bold'>{singleClient.userName}</h4>
 

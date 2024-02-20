@@ -1,6 +1,6 @@
 import {io} from  "socket.io-client";
 
-export const socketInIt = ()=>{
+ const socketInit = ()=>{
     const options = {
         'force new connection':true,
         reconnectionAttempt:'Infinity',
@@ -10,3 +10,5 @@ export const socketInIt = ()=>{
 
     return io('http://localhost:4000',options)
 }
+
+export default socketInit

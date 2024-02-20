@@ -6,7 +6,10 @@
     RELAY_SDP: 'relay-sdp',
     ICE_CANDIDATE: 'ice-candidate',
     SESSION_DESCRIPTION: 'session-description',
-    REMOVE_PEER: 'remove-peer'
+    REMOVE_PEER: 'remove-peer',
+    MUTE: 'mute',
+    UN_MUTE:'un-mute',
+    MUTE_INFO: 'mute-info',
 };
 
 module.exports = ACTIONS;
