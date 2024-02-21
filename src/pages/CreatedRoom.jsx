@@ -20,7 +20,7 @@ const CreatedRoom = () => {
 
   const navigate = useNavigate();
 
-  //destructuring the clients state from custom client useState
+  //destructuring the clients state from custom client useState -> roomId & current user is passed into the useWebRTc
   const {clients , provideRef, handleMute} = useWebRTC(roomId,user);
 
   

@@ -79,7 +79,7 @@ io.on('connection',(socket)=>{
             });
 
 
-            //current client or user ko bhi add-event emit kro
+            //current client or user jisne abhi room new room join kia hai usko bhi add-event emit kro
             //jo current user hai usko bhi add peer event emit kro jisme peer id hogi sarree clients jo phle se room m present hai
             socket.emit(ACTIONS.ADD_PEER,{
                 peerId: clientId,

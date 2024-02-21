@@ -14,6 +14,7 @@ export const useWebRTC = (roomId, user) => {
     const localMediaStream = useRef(null);
     const clientsRef = useRef(null);
 
+    //function to addNewclient same as setClients but with some conditions 
     const addNewClient = useCallback(
         (newClient, cb) => {
             
@@ -38,8 +39,11 @@ export const useWebRTC = (roomId, user) => {
 
     useEffect(() => {
         const initChat = async () => {
+            //new socket created
             socket.current = socketInit();
+            //capturing user media
             await captureMedia();
+            //after media captured add new client into client state
             addNewClient({ ...user, muted: true }, () => {
              
                 const localElement = audioElements.current[user._id];
@@ -48,10 +52,10 @@ export const useWebRTC = (roomId, user) => {
                     localElement.srcObject = localMediaStream.current;
                 }
             });
+            
             socket.current.on(ACTIONS.MUTE_INFO, ({ userId, isMute }) => {
                 handleSetMute(isMute, userId);
             });
-
             socket.current.on(ACTIONS.ADD_PEER, handleNewPeer);
             socket.current.on(ACTIONS.REMOVE_PEER, handleRemovePeer);
             socket.current.on(ACTIONS.ICE_CANDIDATE, handleIceCandidate);
@@ -62,6 +66,9 @@ export const useWebRTC = (roomId, user) => {
             socket.current.on(ACTIONS.UN_MUTE, ({ peerId, userId }) => {
                 handleSetMute(false, userId);
             });
+
+
+            //emitting join event , to join the room
             socket.current.emit(ACTIONS.JOIN, {
                 roomId,
                 user,
@@ -86,7 +93,7 @@ export const useWebRTC = (roomId, user) => {
                     );
                 }
 
-                // Store it to connections
+                // Store it to connections which store all the remote connections as key value pair, key as there id 
                 connections.current[peerId] = new RTCPeerConnection({
                     iceServers: freeice(),
                 });
@@ -163,7 +170,7 @@ export const useWebRTC = (roomId, user) => {
                 }
             }
             async function handleRemovePeer({ peerId, userId }) {
-                // Correction: peerID to peerId
+                
                 if (connections.current[peerId]) {
                     connections.current[peerId].close();
                 }
