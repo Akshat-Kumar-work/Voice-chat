@@ -91,7 +91,7 @@ export async function  createRoom(type,topic,navigate){
         console.log(response);
         const id = response.data.room._id;
         if(response){
-            navigate(`/room/:${id}`)
+            navigate(`/room/${id}`)
         }
     }
     catch(err){
